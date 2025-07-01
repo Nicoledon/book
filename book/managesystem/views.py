@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.template.defaultfilters import title
 from django.urls import reverse
 from .models import User
+
 # Create your views here.
 
 
@@ -24,7 +25,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("select"))
         else:
             return render(request, "managesystem/login.html", {
                 "message": "Invalid username and/or password."
@@ -63,3 +64,22 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "managesystem/register.html")
+
+class NewTaskForm(forms.Form):
+    book = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Search Books'
+        })
+    )
+def select(request):
+    if request.method =="POST":
+       form = NewTaskForm(request.POST)
+       if form.is_valid():
+           book = form.cleaned_data["book"]
+           return HttpResponse(book)
+       else:
+           return HttpResponse("error")
+    return render(request,"managesystem/select.html" , {
+         "taskform":NewTaskForm()
+    })
