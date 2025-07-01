@@ -1,25 +1,6 @@
 {% extends "managesystem/layoutforlogin.html" %}
 {% load static %}
 {% block body %}
-    <h2>Active Listings</h2>
-{#    {% if title %}#}
-{#    <div class="mb-4 form-control border-success" style = "height: 500px">#}
-{#    {{ title }}#}
-{#    </div>#}
-{#    {% endif %}#}
-    {% if items %}
- {% for  item in items %}
-    <div class="mb-4 form-control border-success" style = "height: 500px;display:
-    flex;flex-direction: row">
-       <img src= {{ item.img }} class="img-fluid" alt="photo" style="width: 300px;height: 450px">
-        <div class="d-flex" style="height: 200px;margin-left: 400px">
-  <div class="vr">
-      <h1>{{ item.name }}</h1>
-      <h1 style="margin-top: 20px">Price :{{ item.bid_price }}</h1>
-      <p style="margin-top: 75px">{{ item.content }}</p>
-  </div>
-</div>
-    </div>
-    {% endfor %}
-    {% endif  %}
+<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1.bp.blogspot.com%2F-QesK5maeoAs%2FUnjCjsWFzNI%2FAAAAAAAABHA%2Fdcrab5U-kC0%2Fs1600%2F18.%2BStockholm%2BPublic%2BLibrary%2B-%2B2.jpg&f=1&nofb=1&ipt=6013d798ae86b7c310e1b150b6e4e2cec9dd922c872e03130ee4c0f3cdf285d7"
+     class="img-fluid "style="width: 90%;height: 50%;margin-left: 50px" alt="...">
 {% endblock %}
