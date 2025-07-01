@@ -16,10 +16,10 @@
                     <a href="{% url 'select' %}">查询书籍</a>
                 </div>
                 <div style="height: 50px;font-size: 25px">
-                    <a href = "www.google.com">借书</a>
+                    <a href = "{% url 'borrowbook' %}">借书</a>
                 </div>
                 <div style="height: 50px;font-size: 25px">
-                    <a href = "www.google.com">还书</a>
+                    <a href = "{% url 'back' %}">还书</a>
                 </div>
             <div style="height: 50px;font-size: 25px">
                     <a href = "{% url 'login' %}">切换账号</a>

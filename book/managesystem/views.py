@@ -79,8 +79,6 @@ def select(request):
            submit_name= form.cleaned_data["book"]
            if booksmanage.objects.filter(name=submit_name).exists():
               item = booksmanage.objects.get(name=submit_name)
-              img=item.img
-              content = item.content
               return render(request , "managesystem/page.html",{
                   "item":item
               })
@@ -90,4 +88,30 @@ def select(request):
            return HttpResponse("error")
     return render(request,"managesystem/select.html" , {
          "taskform":NewTaskForm()
+    })
+
+def borrowbook(request):
+    if request.method == "POST":
+        form = NewTaskForm(request.POST)
+        if form.is_valid():
+            submit_name = form.cleaned_data["book"]
+            if booksmanage.objects.filter(name=submit_name).exists():
+                item = booksmanage.objects.get(name=submit_name)
+                item.is_active = False
+                item.borrow = User.objects.get(username=request.user.username)
+                item.save()
+                return  HttpResponse("success")
+            else:
+                return HttpResponse("error")
+        else:
+            return HttpResponse("error")
+    return render(request, "managesystem/borrow.html", {
+        "borrowform": NewTaskForm()
+    })
+
+def back(request):
+    user = User.objects.get(username=request.user.username)
+    books = user.borrowed.all()
+    return render(request , "managesystem/back.html",{
+        "books":books
     })
