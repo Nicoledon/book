@@ -20,11 +20,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">首页</a>
             </li>
-
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">登出</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'select' %}">功能</a></a>
+            </li>
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}">登入</a>
@@ -33,6 +35,7 @@
                     <a class="nav-link" href="{% url 'register' %}">注册</a>
                 </li>
             {% endif %}
+
         </ul>
         <hr>
         {% block body %}

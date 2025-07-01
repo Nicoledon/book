@@ -1,12 +1,14 @@
 from wsgiref.util import request_uri
 from django import  forms
 from django.contrib.auth import authenticate, login, logout
+from django.core.mail import forbid_multi_line_headers
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import title
 from django.urls import reverse
-from .models import User
+from .models import User, booksmanage
+
 
 # Create your views here.
 
@@ -43,7 +45,6 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
@@ -51,7 +52,6 @@ def register(request):
             return render(request, "managesystem/register.html", {
                 "message": "Passwords must match."
             })
-
         # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
@@ -76,8 +76,16 @@ def select(request):
     if request.method =="POST":
        form = NewTaskForm(request.POST)
        if form.is_valid():
-           book = form.cleaned_data["book"]
-           return HttpResponse(book)
+           submit_name= form.cleaned_data["book"]
+           if booksmanage.objects.filter(name=submit_name).exists():
+              item = booksmanage.objects.get(name=submit_name)
+              img=item.img
+              content = item.content
+              return render(request , "managesystem/page.html",{
+                  "item":item
+              })
+           else:
+               return HttpResponse("error")
        else:
            return HttpResponse("error")
     return render(request,"managesystem/select.html" , {

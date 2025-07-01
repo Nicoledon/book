@@ -1,0 +1,22 @@
+{% extends "managesystem/layout.html" %}
+{% load static %}
+{% block body %}
+    <h2>查询结果</h2>
+{#    {% if title %}#}
+{#    <div class="mb-4 form-control border-success" style = "height: 500px">#}
+{#    {{ title }}#}
+{#    </div>#}
+{#    {% endif %}#}
+    {% if item %}
+    <div class="mb-4 form-control border-success" style = "height: 500px;display:
+    flex;flex-direction: row">
+       <img src= {{ item.img }} class="img-fluid" alt="photo" style="width: 300px;height: 450px">
+        <div class="d-flex" style="height: 200px;margin-left: 400px">
+  <div class="vr">
+      <h1>{{ item.name }}</h1>
+      <p style="margin-top: 75px">{{ item.content }}</p>
+  </div>
+</div>
+    </div>
+    {% endif  %}
+{% endblock %}
