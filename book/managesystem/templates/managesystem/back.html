@@ -1,13 +1,23 @@
 {% extends "managesystem/layout.html" %}
-{% load static %}
+
+{% block title %}
+    查询
+{% endblock %}
+
 {% block body %}
-    <h2>还书</h2>
-{#    {% if title %}#}
-{#    <div class="mb-4 form-control border-success" style = "height: 500px">#}
-{#    {{ title }}#}
-{#    </div>#}
-{#    {% endif %}#}
-    {% for book in books %}
-       <table class = "table-danger">{{ book.name }}</table>
-    {% endfor  %}
+    <form action = "{% url 'back' %}" method="post">
+        <div class="mb-3 row"style="margin-top: 500px;margin-left: 50px">
+            <div class="col-sm-10">
+                {%  csrf_token %}
+                <select class ="form-select form-select-lg"style="height: 40px;width: 1000px" name ="borrowed" id = "borrowed">
+                    {% for book in books %}
+                    <option value = {{ book.name }}>
+                       {{ book.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">点击</button>
+        </div>
+    </form>
 {% endblock %}

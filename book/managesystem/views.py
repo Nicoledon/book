@@ -7,6 +7,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import title
 from django.urls import reverse
+from django.utils.text import normalize_newlines
+
 from .models import User, booksmanage
 
 
@@ -112,6 +114,12 @@ def borrowbook(request):
 def back(request):
     user = User.objects.get(username=request.user.username)
     books = user.borrowed.all()
+    if request.method =="POST":
+       name = request.POST.get('borrowed')
+       booker = booksmanage.objects.get(name=name)
+       booker.is_active = True
+       booker.borrow = None
+       booker.save()
     return render(request , "managesystem/back.html",{
         "books":books
     })

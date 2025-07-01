@@ -2,11 +2,6 @@
 {% load static %}
 {% block body %}
     <h2>查询结果</h2>
-{#    {% if title %}#}
-{#    <div class="mb-4 form-control border-success" style = "height: 500px">#}
-{#    {{ title }}#}
-{#    </div>#}
-{#    {% endif %}#}
     {% if item %}
     <div class="mb-4 form-control border-success" style = "height: 500px;display:
     flex;flex-direction: row">
@@ -15,6 +10,13 @@
   <div class="vr">
       <h1>{{ item.name }}</h1>
       <p style="margin-top: 75px">{{ item.content }}</p>
+      {% if item.is_active %}
+     <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="popover" data-bs-title="Popover title">可借
+     </button>
+     {% else %}
+         <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title">暂无
+         </button>
+             {% endif %}
   </div>
 </div>
     </div>

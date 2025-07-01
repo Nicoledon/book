@@ -6,7 +6,7 @@
 
 {% block body %}
     <form action = "{% url 'borrowbook' %}" method="post">
-<div class="mb-3 row"style="margin-top: 500px">
+<div class="mb-3 row"style="margin-top: 500px;margin-left: 50px">
   <div class="col-sm-10">
       {%  csrf_token %}
       {{ borrowform }}
